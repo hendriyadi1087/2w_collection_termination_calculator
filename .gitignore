@@ -1,0 +1,18 @@
+# Credentials (never commit)
+.clasprc.json
+.env
+*.pem
+*.key
+credentials*.json
+client_secret*.json
+
+# Data files (keep data out of the repo)
+*.xlsx
+*.xls
+*.csv
+*.zip
+
+# Dependencies and system files
+node_modules/
+Thumbs.db
+desktop.ini
