@@ -76,13 +76,16 @@ pelunasan customer motorcycle collection yang mereka tangani. Terdiri dari `Code
      historis jadi 0, hasil salah tanpa error). Lebih aman tetap memakai data lama sementara.
    - Setelah pulih: cek di kalkulator keterangan data menunjukkan aging kemarin + jam payment terbaru.
 2. **Perubahan domain kantor `simasfinance.co.id` → `simasfin.id`** (dicek 24 Nov 2026). Kode tidak
-   memeriksa domain email; login agency = username/password di sheet Auth. Yang perlu dicek user:
-   - Jenis perubahan: ganti nama domain di Workspace yang sama (akun & file tetap) atau akun baru.
-   - `appsscript.json` di repo: `executeAs: USER_ACCESSING`, `access: ANYONE`. Bila deployment live
-     memang begini, setiap pengguna butuh akses **edit** ke spreadsheet Auth (menulis `last_login`,
-     riwayat) dan akses baca Calculator_Feed — berisiko (agency bisa membuka sheet berisi hash
-     password) dan rawan putus saat domain berubah. Cek Deploy → Manage deployments; disarankan
-     "Execute as: Me" (dengan persetujuan user, ubah manifest + New version).
+   memeriksa domain email; login agency = username/password di sheet Auth. Akun hanya berganti nama
+   (pemilik spreadsheet Auth & Calculator_Feed = akun yang sama, kini tampil @simasfin.id) → file,
+   script, dan izin berbagi ikut aman.
+   - Deployment live (dicek user 24 Nov): "Execute as: User accessing", "Who has access: Anyone with
+     Google account". Akibatnya hanya akun yang diberi akses edit ke kedua spreadsheet (pemilik + 3 user
+     internal) yang bisa memakai web app; agency eksternal tidak.
+   - **Keputusan:** ganti ke "Execute as: Me" (`executeAs: USER_DEPLOYING` di `appsscript.json`, sudah
+     diubah di repo 24 Nov, **belum diterapkan di Apps Script**). User mengubahnya lewat Deploy →
+     Manage deployments → Edit → Execute as: Me → New version (link `/exec` tetap).
+   - Konsekuensi "Me": app berjalan atas akun pemilik; kalau akun itu dinonaktifkan, app berhenti.
 
 ## Peta kode
 
