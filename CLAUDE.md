@@ -82,10 +82,11 @@ pelunasan customer motorcycle collection yang mereka tangani. Terdiri dari `Code
    - Deployment live (dicek user 24 Nov): "Execute as: User accessing", "Who has access: Anyone with
      Google account". Akibatnya hanya akun yang diberi akses edit ke kedua spreadsheet (pemilik + 3 user
      internal) yang bisa memakai web app; agency eksternal tidak.
-   - **Keputusan:** ganti ke "Execute as: Me" (`executeAs: USER_DEPLOYING` di `appsscript.json`, sudah
-     diubah di repo 24 Nov, **belum diterapkan di Apps Script**). User mengubahnya lewat Deploy →
-     Manage deployments → Edit → Execute as: Me → New version (link `/exec` tetap).
+   - **Selesai 24 Nov 2026:** deployment diubah ke "Execute as: Me" (New version, link `/exec` tetap),
+     diuji user dan berjalan. Repo `appsscript.json` = `executeAs: USER_DEPLOYING` (sama dengan live).
    - Konsekuensi "Me": app berjalan atas akun pemilik; kalau akun itu dinonaktifkan, app berhenti.
+   - Akses edit 3 user internal ke spreadsheet Auth & Calculator_Feed: **dibiarkan** (keputusan user
+     24 Nov 2026).
 
 ## Peta kode
 
