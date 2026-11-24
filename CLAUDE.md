@@ -75,6 +75,14 @@ pelunasan customer motorcycle collection yang mereka tangani. Terdiri dari `Code
      tertunggak akan tertulis kosong, dan kalkulator membaca kosong sebagai 0 (bunga berjalan & denda
      historis jadi 0, hasil salah tanpa error). Lebih aman tetap memakai data lama sementara.
    - Setelah pulih: cek di kalkulator keterangan data menunjukkan aging kemarin + jam payment terbaru.
+2. **Perubahan domain kantor `simasfinance.co.id` → `simasfin.id`** (dicek 24 Nov 2026). Kode tidak
+   memeriksa domain email; login agency = username/password di sheet Auth. Yang perlu dicek user:
+   - Jenis perubahan: ganti nama domain di Workspace yang sama (akun & file tetap) atau akun baru.
+   - `appsscript.json` di repo: `executeAs: USER_ACCESSING`, `access: ANYONE`. Bila deployment live
+     memang begini, setiap pengguna butuh akses **edit** ke spreadsheet Auth (menulis `last_login`,
+     riwayat) dan akses baca Calculator_Feed — berisiko (agency bisa membuka sheet berisi hash
+     password) dan rawan putus saat domain berubah. Cek Deploy → Manage deployments; disarankan
+     "Execute as: Me" (dengan persetujuan user, ubah manifest + New version).
 
 ## Peta kode
 
