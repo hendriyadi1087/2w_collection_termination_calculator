@@ -41,8 +41,7 @@ pelunasan customer motorcycle collection yang mereka tangani. Terdiri dari `Code
 - Data dari file aging harian, disalin ke spreadsheet **Calculator_Feed** oleh generator di
   `2w_collection_daily_report/generator` (file `calculator_feed.js`), diisi di job pagi dan job per jam
   (Data Skala Rental Payment) agar selalu terbaru.
-  Catatan Nov 2026: sambungan feed ke job pagi/per jam **hilang karena penimpaan kode ±5 Nov**
-  (bukan belum pernah dipasang) — lihat Pekerjaan terbuka butir 1.
+  Sambungan ke job pagi/per jam aktif kembali (dipulihkan Nov 2026, lihat Pekerjaan terbuka butir 1).
 - Kolom: ppk, nama_customer, branch, outstanding_balance, tenor, counter, interest_effective,
   tanggal_jatuh_tempo, bunga, denda_tertunggak, denda, penalties, rental, drawdown_date.
 - Di file Data Skala Rental Payment, kolom counter = nomor angsuran yang dibayar.
@@ -65,16 +64,12 @@ pelunasan customer motorcycle collection yang mereka tangani. Terdiri dari `Code
 
 ## Pekerjaan terbuka
 
-1. **Data kalkulator berhenti di aging 4 Nov + payment 5 Nov 2026** (dicek 18 Nov 2026). Penyebab: kode
-   generator (project daily_report, Apps Script *Generate_Data_Daily*) tertimpa versi lama ±5 Nov, sehingga
-   3 sambungan ke Calculator_Feed hilang (tulis Base di job pagi, tulis Overlay di job per jam, field
-   `interest_effective` + `denda_tertunggak` di pengolahan aging). Kode kalkulator sendiri tidak bermasalah.
-   - Perbaikan dikerjakan **di sesi project daily_report**: butir 2 dan 3 "pemulihan kode yang tertimpa"
-     (lihat `notes/recovery_2026-11.md` di sana), lalu `calcFeedBackfillManual` sekali.
-   - **Jangan jalankan `calcFeedBackfillManual` sebelum sambungan dipulihkan**: bunga efektif dan denda
-     tertunggak akan tertulis kosong, dan kalkulator membaca kosong sebagai 0 (bunga berjalan & denda
-     historis jadi 0, hasil salah tanpa error). Lebih aman tetap memakai data lama sementara.
-   - Setelah pulih: cek di kalkulator keterangan data menunjukkan aging kemarin + jam payment terbaru.
+1. ~~Data kalkulator berhenti di aging 4 Nov + payment 5 Nov 2026~~ **Selesai** (dikonfirmasi user
+   27 Nov 2026: data sesuai dan ter-update tiap hari). Penyebab dulu: generator (project daily_report)
+   tertimpa versi lama ±5 Nov sehingga sambungan ke Calculator_Feed hilang; dipulihkan di sesi
+   daily_report. Pelajaran: kalau feed kosong/terlambat lagi, cek dulu sambungan di generator; jangan
+   isi ulang feed bila field `interest_effective`/`denda_tertunggak` tidak terisi (kalkulator membaca
+   kosong sebagai 0, hasil salah tanpa error).
 2. **Perubahan domain kantor `simasfinance.co.id` → `simasfin.id`** (dicek 24 Nov 2026). Kode tidak
    memeriksa domain email; login agency = username/password di sheet Auth. Akun hanya berganti nama
    (pemilik spreadsheet Auth & Calculator_Feed = akun yang sama, kini tampil @simasfin.id) → file,
